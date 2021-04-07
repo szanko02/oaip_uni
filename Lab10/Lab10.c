@@ -3,10 +3,7 @@
 #include <math.h>
 #define N 3
 #define N1 N + 1
-float arr[N][N1]=({3,5,1,20},
-                  {8,3,2,6},
-                  {10,20,30,40}
-                 );
+float arr[N][N1];
 float epsilon=0.1;
 void insertionMatrix(void)
 {
