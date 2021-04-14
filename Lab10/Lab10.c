@@ -1,55 +1,45 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#define N 3
-#define N1 N + 1
-float arr[N][N1];
-float epsilon=0.1;
-void insertionMatrix(void)
-{
-    int i, j;
-  //ввод системы
-  printf( "Введите систему:\n" );
-  for ( i = 0; i < N; i++ )
-    for ( j = 0; j < N + 1; j++ )
-      scanf( "%f", & arr[i][j] );
-  //вывод системы
-  printf( "Система:\n" );
-  for ( i = 0; i < N; i++ )
-  {
- for ( j = 0; j < N + 1; j++ )
-      printf( "%.2f ", arr[i][j] );
-    printf( "\n" );    
-  }
-}
 int main()
 {
-  float temp, xx[N1];
-  short int i,j, k;
-  insertionMatrix();
-  //метод Гаусса
-for (i=0; i < N; i++)
+  int i,j,k,n;
+  float array[20][20], b, x[10], sum=0.0;
+  printf("Введите кол-во строк матрицы: ");
+  scanf("%d",&n);
+  printf("Введите эл-ты матрицы\n");
+  for (i=1;i<=n;i++)
     {
-        temp=arr[i][i];
-        for (j = N; j >= i; j--)
-        arr[i][j]/=temp;
-        for(j=i+1; j<N;j++)
+      for (j=1;j<=n;j++)
+        {
+          printf("Элемент[%d][%d]: ", i,j);
+          scanf("%f", &array[i][j]);
+        }
+    } 
+  for (j=1; j<=n;j++)
+    {
+      if(i>j)
+        {
+          b=array[i][j]/array[i][j];
+          for (k=1; k<=n+1;k++)
             {
-            temp=arr[j][i];
-            for (k=N; k>=i; k--)
-            arr[j][k]-=temp*arr[i][k];
+              array[i][k]=array[i][k]-b*array[j][k];
             }
-    }
-xx[N-1]=arr[N-1][N];
-for (i=N-2; i>=0; i++)
+        }
+    } 
+  x[n]=array[n][n+1]/array[n][n];
+  for (i=n-1;i>=1;i--)
     {
-        xx[i]=arr[i][N];
-        for (j=i+1; j<N; j++)
-        xx[i]-=arr[i][j]*xx[j];
+      sum=0;
+      for(j=i+1;j<=n;j++)
+        {
+          sum=sum+array[i][j]*x[i];
+        }
+      x[i]=(array[i][n+1]-sum)/array[i][j];
+
     }
-printf("Решение методом Гаусса:\n");
-    for(i=0;i<N;i++)
-    printf("x%d=%3.1f\n", i+1, xx[i]);
-system("pause");
-return 0;
+  printf("Решение системы:\n");
+  for(i=1;i<=n;i++)
+    {
+      printf("\nx%d=%f\t", i,x[i]);
+    }
+  return(0);
 }
