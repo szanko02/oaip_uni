@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define N 100
-int hashTable[N]
-int HashFunction (int k )
-{
-    return (k%10);
+#include <string.h>
+#include <malloc.h>
+#include <stdint.h>
+
+struct a{
+    int key;
+    int info;
+    struct a *next;
+} data;
+int main(){
+int i
+data *array[100];
+for (i=0;i<100;++i) {
+array[i] = malloc(sizeof(data));
 }
 
-void main()
-{
-    int key;
-
-    printf("Key=");
-    scanf("%d", &key);
-    printf("HashFunction(%d)=%d\n",key,HashFunction(key));
 }
